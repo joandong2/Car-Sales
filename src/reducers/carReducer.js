@@ -8,15 +8,14 @@ export const initialState = {
 };
 
 export const carReducer = (state = initialState, action) => {
-    console.log("car reducer", action.payload);
-    // switch (action.type) {
-    //     case "ADD_FEATURE":
-    //         return {
-    //             ...state,
-    //             features: [...state.features, action.payload],
-    //         };
-    //     default:
-    //         return state;
-    // }
-    return state;
+    console.log(action.payload);
+    switch (action.type) {
+        case "ADD_FEATURE":
+            return {
+                ...state,
+                features: action.payload,
+            };
+        default:
+            return state;
+    }
 };

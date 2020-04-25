@@ -15,10 +15,34 @@ export const featuresReducer = (state = initialState, action) => {
         feature = state.features.filter(
             (item) => item.id === Number(action.payload)
         );
+
+        state.selected.push(feature[0]);
+
+        return {
+            ...state,
+            features: state.features.filter(
+                (item) => item.id !== Number(action.payload)
+            ),
+        };
     }
 
-    if (feature.length !== 0) {
-        state.selected.push(feature[0]);
+    if (action.type === "REMOVE_FEATURE") {
+        feature = state.selected.filter(
+            (item) => item.id === Number(action.payload)
+        );
+
+        // console.log("feature", feature);
+        // console.log("state selected", state.selected);
+
+        state.features.push(feature[0]);
+
+        return {
+            ...state,
+            features: state.features,
+            selected: state.selected.filter(
+                (item) => item.id !== Number(action.payload)
+            ),
+        };
     }
 
     return state;
